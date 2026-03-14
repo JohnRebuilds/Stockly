@@ -6,12 +6,12 @@ public partial class Inventory
     public IProductService ProductService { get; set; } = null!;
 
     public IReadOnlyList<Product> Products { get; set; } = null!;
+    public ProductKeyPerformanceIndicators KeyPerformanceIndicators { get; set; } = null!;
 
-    public int TotalProductCount { get; set; }
 
     protected override void OnInitialized()
     {
         Products = ProductService.GetAllProducts();
-        TotalProductCount = ProductService.GetTotalProductCount();
+        KeyPerformanceIndicators = ProductService.GetProductKeyPerformanceData();
     }
 }

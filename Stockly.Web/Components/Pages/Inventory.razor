@@ -12,21 +12,21 @@ else
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h5>Antal artiklar: @TotalProductCount st</h5>
+                    <h5>Antal artiklar: @KeyPerformanceIndicators.ProductCount st</h5>
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h5>Totalt lagervärde: 0</h5>
+                    <h5>Totalt lagervärde: @KeyPerformanceIndicators.InventoryValue.ToString("C")</h5>
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h5>Produkter med lågt saldo: 0</h5>
+                    <h5>Produkter med lågt saldo: @KeyPerformanceIndicators.LowStockProductCount st</h5>
                 </div>
             </div>
         </div>

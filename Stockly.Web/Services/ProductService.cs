@@ -84,5 +84,17 @@ public class ProductService : IProductService
 
     public Product? GetProductById(Guid id) => _products.FirstOrDefault(x => x.Id == id);
 
+    public ProductKeyPerformanceIndicators GetProductKeyPerformanceData()
+    {
+        int productCount = _products.Count;
+        decimal inventoryValue = _products.Sum(x => x.Quantity * x.Price);
+
+        var lowStockProducts = _products.Where(x => x.Quantity <= x.MinStockLevel);
+
+        return new ProductKeyPerformanceIndicators(productCount, inventoryValue, lowStockProducts.Count());
+    }
+
+    public decimal GetTotalInventoryValue() => _products.Sum(x => x.Quantity * x.Price);
+
     public int GetTotalProductCount() => _products.Count;
 }
