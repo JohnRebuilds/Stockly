@@ -7,8 +7,11 @@ public partial class Inventory
 
     public IReadOnlyList<Product> Products { get; set; } = null!;
 
+    public int TotalProductCount { get; set; }
+
     protected override void OnInitialized()
     {
         Products = ProductService.GetAllProducts();
+        TotalProductCount = ProductService.GetTotalProductCount();
     }
 }
