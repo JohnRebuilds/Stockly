@@ -93,8 +93,4 @@ public class ProductService : IProductService
 
         return new ProductKeyPerformanceIndicators(productCount, inventoryValue, lowStockProducts.Count());
     }
-
-    public decimal GetTotalInventoryValue() => _products.Sum(x => x.Quantity * x.Price);
-
-    public int GetTotalProductCount() => _products.Count;
 }
