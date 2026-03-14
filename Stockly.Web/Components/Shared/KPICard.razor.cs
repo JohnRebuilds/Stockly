@@ -25,7 +25,7 @@ public partial class KPICard<TValue> where TValue : INumber<TValue>
     private string? _textColor { get; set; }
     private string _formatString { get; set; } = string.Empty;
 
-    protected override void OnInitialized()
+    protected override void OnParametersSet()
     {
         SetFormatString();
         SetColorClasses();
