@@ -1,6 +1,8 @@
 /* CSS-variabler för färger, typsnitt m.m */
 :root {
     --stockly-primary: #309f27;
+    --stockly-secondary: #2165b9;
+    --stockly-danger: #b42222;
     --sidebar-width: 300px;
 }
 

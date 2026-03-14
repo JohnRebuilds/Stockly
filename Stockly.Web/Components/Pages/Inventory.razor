@@ -10,28 +10,42 @@ else
 {
     <div class="row mb-3">
         <div class="col">
-            <div class="card">
+            <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
-                    <h5>Antal artiklar: @KeyPerformanceIndicators.ProductCount st</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="text-muted mb-0">Artiklar i sortimentet</h6>
+                        <div class="bg-success bg-opacity-10 p-2 rounded">
+                            <i class="bi bi-box-seam text-success h4 mb-0"></i>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-baseline">
+                        <h2 class="fw-bold mb-0">@KeyPerformanceIndicators.ProductCount</h2>
+                        <small class="text-muted ms-1">st</small>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col">
-            <div class="card">
+            <div class="card shadow-sm border-0">
                 <div class="card-body">
-                    <h5>Totalt lagervärde: @KeyPerformanceIndicators.InventoryValue.ToString("C")</h5>
+                    <h6 class="text-muted">Totalt lagervärde</h6>
+                    <i class="bi bi-coin"></i>
+                    <h1>@KeyPerformanceIndicators.InventoryValue.ToString("C")</h1>
                 </div>
             </div>
         </div>
         <div class="col">
-            <div class="card">
+            <div class="card shadow-sm border-0">
                 <div class="card-body">
-                    <h5>Produkter med lågt saldo: @KeyPerformanceIndicators.LowStockProductCount st</h5>
+                    <h6 class="text-muted">Lågt lagersaldo</h6>
+                    <i class="bi-exclamation-triangle-fill"></i>
+                    <h1>@KeyPerformanceIndicators.LowStockProductCount st</h1>
                 </div>
             </div>
         </div>
     </div>
-    <table class="table table-bordered">
+    <table class="table table-bordered shadow-sm">
         <thead class="table-dark">
             <tr>
                 <th>Art.nr</th>
