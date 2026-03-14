@@ -10,13 +10,27 @@ else
 {
     <div class="row mb-3">
         <div class="col">
-            <KPICard Text="Artiklar i sortiment" KeyPerformanceValue="0" SmallText="st"Color="BootstrapColor.Success" Icon="@BootstrapIcons.BoxSeam" />
+            <KPICard 
+                Text="Artiklar i sortiment" 
+                KeyPerformanceValue="@KeyPerformanceIndicators.ProductCount" 
+                SmallText="st" 
+                Color="BootstrapColor.Success" 
+                Icon="@BootstrapIcons.BoxSeam" />
         </div>
         <div class="col">
-            <KPICard Text="Totalt lagervärde" KeyPerformanceValue="0" Color="BootstrapColor.Success" Icon="@BootstrapIcons.Coin" />
+            <KPICard 
+                Text="Totalt lagervärde" 
+                KeyPerformanceValue="@KeyPerformanceIndicators.InventoryValue" 
+                Color="BootstrapColor.Success" 
+                Icon="@BootstrapIcons.Coin" />
         </div>
         <div class="col">
-            <KPICard Text="Lågt lagersaldo" KeyPerformanceValue="0" SmallText="st" Color="BootstrapColor.Danger" Icon="@BootstrapIcons.ExclamationTriangle" />
+            <KPICard 
+                Text="Lågt lagersaldo" 
+                KeyPerformanceValue="@KeyPerformanceIndicators.LowStockProductCount" 
+                SmallText="st" 
+                Color="BootstrapColor.Danger" 
+                Icon="@BootstrapIcons.ExclamationTriangle" />
         </div>
     </div>
     <table class="table table-bordered shadow-sm">

@@ -1,31 +1,16 @@
-﻿<div class="card shadow-sm border-0 h-100">
+﻿@typeparam TValue
+
+<div class="card shadow-sm border-0 h-100">
     <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-2">
             <h6 class="text-muted mb-0">@Text</h6>
-            @{
-                switch (Color)
-                {
-                    case BootstrapColor.Primary:
-                        <div class="bg-primary bg-opacity-10 p-2 rounded">
-                            <i class=@(!string.IsNullOrWhiteSpace(Icon) ? $"bi {Icon} text-primary h4 mb-0" : "bi bi-bootstrap text-primary h4 mb-0")></i>
-                        </div>
-                        break;
-                    case BootstrapColor.Success:
-                        <div class="bg-success bg-opacity-10 p-2 rounded">
-                            <i class=@(!string.IsNullOrWhiteSpace(Icon) ? $"bi {Icon} text-success h4 mb-0" : "bi bi-bootstrap text-success h4 mb-0")></i>
-                        </div>
-                        break;
-                    case BootstrapColor.Danger:
-                        <div class="bg-danger bg-opacity-10 p-2 rounded">
-                            <i class=@(!string.IsNullOrWhiteSpace(Icon) ? $"bi {Icon} text-danger h4 mb-0" : "bi bi-bootstrap text-danger h4 mb-0")></i>
-                        </div>
-                        break;
-                }
-            }
+            <div class=@($"{BackgroundColor} bg-opacity-10 p-2 rounded")>
+                <i class=@(!string.IsNullOrWhiteSpace(Icon) ? $"bi {Icon} {TextColor} h4 mb-0" : $"bi bi-bootstrap {TextColor} h4 mb-0")></i>
+            </div>
         </div>
 
         <div class="d-flex align-items-baseline">
-            <h2 class="fw-bold mb-0">0</h2>
+            <h2 class="fw-bold mb-0">@KeyPerformanceValue</h2>
             @if (!string.IsNullOrWhiteSpace(SmallText))
             {
                 <small class="text-muted ms-1">@SmallText</small>

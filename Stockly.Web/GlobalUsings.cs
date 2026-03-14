@@ -1,4 +1,5 @@
 ﻿// Microsoft
+global using System.Numerics;
 global using Microsoft.AspNetCore.Components;
 
 // Stockly
