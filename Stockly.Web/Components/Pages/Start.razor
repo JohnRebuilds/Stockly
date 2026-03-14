@@ -1,0 +1,14 @@
+﻿@page "/"
+
+<AppTitle Title="Start" />
+
+<p>Start</p>
+
+@code {
+    @inject NavigationManager NavigationManager
+
+    protected override void OnInitialized()
+    {
+        NavigationManager.NavigateTo("/inventory", replace: true);
+    }
+}
