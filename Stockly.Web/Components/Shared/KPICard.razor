@@ -4,13 +4,13 @@
     <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-2">
             <h6 class="text-muted mb-0">@Text</h6>
-            <div class=@($"{BackgroundColor} bg-opacity-10 p-2 rounded")>
-                <i class=@(!string.IsNullOrWhiteSpace(Icon) ? $"bi {Icon} {TextColor} h4 mb-0" : $"bi bi-bootstrap {TextColor} h4 mb-0")></i>
+            <div class=@($"{_backgroundColor} bg-opacity-10 p-2 rounded")>
+                <i class=@(!string.IsNullOrWhiteSpace(Icon) ? $"bi {Icon} {_textColor} h4 mb-0" : $"bi bi-bootstrap {_textColor} h4 mb-0")></i>
             </div>
         </div>
 
         <div class="d-flex align-items-baseline">
-            <h2 class="fw-bold mb-0">@KeyPerformanceValue</h2>
+            <h2 class="fw-bold mb-0">@string.Format(_formatString, KeyPerformanceValue)</h2>
             @if (!string.IsNullOrWhiteSpace(SmallText))
             {
                 <small class="text-muted ms-1">@SmallText</small>

@@ -15,18 +15,42 @@ public partial class KPICard<TValue> where TValue : INumber<TValue>
     public BootstrapColor Color { get; set; }
 
     [Parameter]
-    public string FormatString { get; set; } = string.Empty;
+    public DisplayFormat DisplayFormat { get; set; }
 
     [EditorRequired]
     [Parameter]
     public TValue KeyPerformanceValue { get; set; }
 
-    public string? BackgroundColor { get; set; }
-    public string? TextColor { get; set; }
+    private string? _backgroundColor { get; set; }
+    private string? _textColor { get; set; }
+    private string _formatString { get; set; } = string.Empty;
 
     protected override void OnInitialized()
     {
+        SetFormatString();
         SetColorClasses();
+    }
+
+    private void SetFormatString()
+    {
+        switch (DisplayFormat)
+        {
+            case DisplayFormat.Standard:
+                _formatString = "{0}";
+                break;
+            case DisplayFormat.Currency:
+                _formatString = "{0:C}";
+                break;
+            case DisplayFormat.Number:
+                _formatString = "{0:N0}";
+                break;
+            case DisplayFormat.Percentage:
+                _formatString = "{0:P1}";
+                break;
+            default:
+                _formatString = "{0}";
+                break;
+        }
     }
 
     private void SetColorClasses()
@@ -34,24 +58,24 @@ public partial class KPICard<TValue> where TValue : INumber<TValue>
         switch (Color)
         {
             case BootstrapColor.Primary:
-                BackgroundColor = "bg-primary";
-                TextColor = "text-primary";
+                _backgroundColor = "bg-primary";
+                _textColor = "text-primary";
                 break;
             case BootstrapColor.Success:
-                BackgroundColor = "bg-success";
-                TextColor = "text-success";
+                _backgroundColor = "bg-success";
+                _textColor = "text-success";
                 break;
             case BootstrapColor.Warning:
-                BackgroundColor = "bg-warning";
-                TextColor = "text-warning";
+                _backgroundColor = "bg-warning";
+                _textColor = "text-warning";
                 break;
             case BootstrapColor.Danger:
-                BackgroundColor = "bg-danger";
-                TextColor = "text-danger";
+                _backgroundColor = "bg-danger";
+                _textColor = "text-danger";
                 break;
             default:
-                BackgroundColor = "bg-secondary";
-                TextColor = "text-secondary";
+                _backgroundColor = "bg-secondary";
+                _textColor = "text-secondary";
                 break;
         }
     }

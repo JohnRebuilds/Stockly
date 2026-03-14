@@ -13,15 +13,17 @@ else
             <KPICard 
                 Text="Artiklar i sortiment" 
                 KeyPerformanceValue="@KeyPerformanceIndicators.ProductCount" 
-                SmallText="st" 
+                SmallText="st"
+                DisplayFormat="DisplayFormat.Number"
                 Color="BootstrapColor.Success" 
                 Icon="@BootstrapIcons.BoxSeam" />
         </div>
         <div class="col">
             <KPICard 
                 Text="Totalt lagervärde" 
-                KeyPerformanceValue="@KeyPerformanceIndicators.InventoryValue" 
-                Color="BootstrapColor.Success" 
+                KeyPerformanceValue="@KeyPerformanceIndicators.InventoryValue"
+                DisplayFormat="DisplayFormat.Currency"
+                Color="BootstrapColor.Success"
                 Icon="@BootstrapIcons.Coin" />
         </div>
         <div class="col">
@@ -29,6 +31,7 @@ else
                 Text="Lågt lagersaldo" 
                 KeyPerformanceValue="@KeyPerformanceIndicators.LowStockProductCount" 
                 SmallText="st" 
+                DisplayFormat="DisplayFormat.Number"
                 Color="BootstrapColor.Danger" 
                 Icon="@BootstrapIcons.ExclamationTriangle" />
         </div>
