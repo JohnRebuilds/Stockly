@@ -5,3 +5,4 @@ global using Microsoft.AspNetCore.Components;
 global using Stockly.Web.Components;
 global using Stockly.Web.Models;
 global using Stockly.Web.Services;
+global using Stockly.Web.Components.UI.Enums;
