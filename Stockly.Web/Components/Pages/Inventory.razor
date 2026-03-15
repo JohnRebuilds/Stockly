@@ -53,7 +53,15 @@ else
                     <td>@product.SKU</td>
                     <td>@product.Name</td>
                     <td>@product.Category</td>
-                    <td>@product.Quantity</td>
+                    <td>
+                        <div class="d-flex">
+                            <span class="me-auto">@product.Quantity</span>
+                            <div>
+                                <i class="bi bi-plus-circle text-success fs-5 cursor-pointer" @onclick="() => IncreaseQuantity(product.Id)"></i>
+                                <i class="bi bi-dash-circle text-danger fs-5 cursor-pointer" @onclick="() => DecreaseQuantity(product.Id)"></i>
+                            </div>
+                        </div>
+                    </td>
                     <td>@product.Price.ToString("C")</td>
                 </tr>
             }

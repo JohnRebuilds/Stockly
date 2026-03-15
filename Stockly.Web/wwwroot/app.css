@@ -17,6 +17,10 @@
     color: white;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 h1:focus {
     outline: none;
 }

@@ -11,6 +11,39 @@ public partial class Inventory
 
     protected override void OnInitialized()
     {
+        LoadInventoryData();
+    }
+
+    private void IncreaseQuantity(Guid productId)
+    {
+        Product? productToUpdate = ProductService.GetProductById(productId);
+        if (productToUpdate is not null)
+        {
+            ProductService.IncreaseProductQuantity(productToUpdate);
+            LoadInventoryData();
+        }
+        else
+        {
+            // Todo: Felhantering
+        }
+    }
+
+    private void DecreaseQuantity(Guid productId)
+    {
+        Product? productToUpdate = ProductService.GetProductById(productId);
+        if (productToUpdate is not null)
+        {
+            ProductService.DecreaseProductQuantity(productToUpdate);
+            LoadInventoryData();
+        }
+        else
+        {
+            // Todo: Felhantering
+        }
+    }
+
+    private void LoadInventoryData()
+    {
         Products = ProductService.GetAllProducts();
         KeyPerformanceIndicators = ProductService.GetProductKeyPerformanceData();
     }
