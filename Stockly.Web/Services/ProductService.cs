@@ -41,4 +41,7 @@ public class ProductService : IProductService
 
         return new ProductKeyPerformanceIndicators(productCount, inventoryValue, lowStockProductCount);
     }
+
+    public void IncreaseProductQuantity(Product product) => product.Quantity++;
+    public void DecreaseProductQuantity(Product product) => product.Quantity--;
 }

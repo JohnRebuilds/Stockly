@@ -5,4 +5,6 @@ public interface IProductService
     public IReadOnlyList<Product> GetAllProducts();
     public Product? GetProductById(Guid id);
     public ProductKeyPerformanceIndicators GetProductKeyPerformanceData();
+    public void IncreaseProductQuantity(Product product);
+    public void DecreaseProductQuantity(Product product);
 }
