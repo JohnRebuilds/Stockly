@@ -1,6 +1,6 @@
 /* CSS-variabler för färger, typsnitt m.m */
 :root {
-    --stockly-primary: #309f27;
+    --stockly-primary: #198754;
     --stockly-secondary: #2165b9;
     --stockly-danger: #b42222;
     --sidebar-width: 300px;
@@ -14,11 +14,20 @@
 /* Ändrar bakgrundsfärgen på den aktiva länken i sidebaren */
 .nav-pills .nav-link.active {
     background-color: var(--stockly-primary);
+    /*border: 1px solid #198754;*/
     color: white;
 }
 
-.cursor-pointer {
-    cursor: pointer;
+/* Ändra färgen på ramen vid fokus */
+.form-control:focus {
+    border-color: var(--stockly-primary);
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+/* När input-fältet får fokus, ändra färg på ikonen bredvid */
+.input-group:focus-within .bi-search {
+    color: var(--stockly-primary) !important;
+    transition: color 0.2s ease-in-out;
 }
 
 h1:focus {

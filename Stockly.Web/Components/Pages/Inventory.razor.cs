@@ -22,10 +22,6 @@ public partial class Inventory
             ProductService.IncreaseProductQuantity(productToUpdate);
             LoadInventoryData();
         }
-        else
-        {
-            // Todo: Felhantering
-        }
     }
 
     private void DecreaseQuantity(Guid productId)
@@ -35,10 +31,6 @@ public partial class Inventory
         {
             ProductService.DecreaseProductQuantity(productToUpdate);
             LoadInventoryData();
-        }
-        else
-        {
-            // Todo: Felhantering
         }
     }
 
