@@ -3,6 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddScoped<DataProvider>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
