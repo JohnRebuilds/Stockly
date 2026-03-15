@@ -49,7 +49,7 @@ else
         <tbody>
             @foreach (var product in Products)
             {
-                <tr>
+                <tr class="@(product.Quantity <= product.MinStockLevel ? "table-danger" : "")">
                     <td>@product.SKU</td>
                     <td>@product.Name</td>
                     <td>@product.Category</td>
