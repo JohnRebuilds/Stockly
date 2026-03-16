@@ -23,6 +23,22 @@ public class ProductService : IProductService
         }
     }
 
+    public IReadOnlyList<Product> FilterProducts(string filter)
+    {
+        var products = _dataProvider.GetAll();
+
+        if (products is null)
+        {
+            return Array.Empty<Product>();
+        }
+
+        IQueryable<Product> query = products.AsQueryable();
+
+        query = query.Where(x => x.Name.Contains(filter) || x.SKU.Contains(filter));
+
+        return query.ToList().AsReadOnly();
+    }
+
     public Product? GetProductById(Guid id)
     {
         var product = _dataProvider.GetById(id);

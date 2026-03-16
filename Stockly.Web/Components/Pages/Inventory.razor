@@ -2,48 +2,45 @@
 
 <AppTitle Title="Lagerlista" />
 
+<div class="row mb-3">
+    <div class="col">
+        <KPICard Text="Artiklar i sortiment"
+                 KeyPerformanceValue="@KeyPerformanceIndicators.ProductCount"
+                 SmallText="st"
+                 DisplayFormat="DisplayFormat.Number"
+                 Color="BootstrapColor.Success"
+                 Icon="@BootstrapIcons.BoxSeam" />
+    </div>
+    <div class="col">
+        <KPICard Text="Totalt lagervärde"
+                 KeyPerformanceValue="@KeyPerformanceIndicators.InventoryValue"
+                 DisplayFormat="DisplayFormat.Currency"
+                 Color="BootstrapColor.Success"
+                 Icon="@BootstrapIcons.Coin" />
+    </div>
+    <div class="col">
+        <KPICard Text="Lågt lagersaldo"
+                 KeyPerformanceValue="@KeyPerformanceIndicators.LowStockProductCount"
+                 SmallText="st"
+                 DisplayFormat="DisplayFormat.Number"
+                 Color="BootstrapColor.Danger"
+                 Icon="@BootstrapIcons.ExclamationTriangle" />
+    </div>
+</div>
+<div class="mb-3" style="max-width: 400px;">
+    <div class="input-group">
+        <span class="input-group-text bg-white border-end-0">
+            <i class="bi bi-search text-muted"></i>
+        </span>
+        <input type="text" class="form-control border-start-0" placeholder="Sök på namn eller art.nr..." @bind="SearchTerm" @bind:event="oninput" />
+    </div>
+</div>
 @if (Products is null || Products.Count == 0)
 {
-    <p>Det finns inga produkter i lager.</p>
+    <p>Inga produkter hittades.</p>
 }
 else
 {
-    <div class="row mb-3">
-        <div class="col">
-            <KPICard 
-                Text="Artiklar i sortiment" 
-                KeyPerformanceValue="@KeyPerformanceIndicators.ProductCount" 
-                SmallText="st"
-                DisplayFormat="DisplayFormat.Number"
-                Color="BootstrapColor.Success" 
-                Icon="@BootstrapIcons.BoxSeam" />
-        </div>
-        <div class="col">
-            <KPICard 
-                Text="Totalt lagervärde" 
-                KeyPerformanceValue="@KeyPerformanceIndicators.InventoryValue"
-                DisplayFormat="DisplayFormat.Currency"
-                Color="BootstrapColor.Success"
-                Icon="@BootstrapIcons.Coin" />
-        </div>
-        <div class="col">
-            <KPICard 
-                Text="Lågt lagersaldo" 
-                KeyPerformanceValue="@KeyPerformanceIndicators.LowStockProductCount" 
-                SmallText="st" 
-                DisplayFormat="DisplayFormat.Number"
-                Color="BootstrapColor.Danger" 
-                Icon="@BootstrapIcons.ExclamationTriangle" />
-        </div>
-    </div>
-    <div class="mb-3" style="max-width: 400px;">
-        <div class="input-group">
-            <span class="input-group-text bg-white border-end-0">
-                <i class="bi bi-search text-muted"></i>
-            </span>
-            <input type="text" class="form-control border-start-0" placeholder="Sök på namn eller art.nr..." />
-        </div>
-    </div>
     <table class="table table-bordered shadow-sm">
         <thead class="table-dark">
             <tr>

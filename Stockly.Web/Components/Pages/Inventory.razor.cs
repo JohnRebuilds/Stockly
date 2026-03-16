@@ -8,6 +8,24 @@ public partial class Inventory
     public IReadOnlyList<Product> Products { get; set; } = null!;
     public ProductKeyPerformanceIndicators KeyPerformanceIndicators { get; set; } = null!;
 
+    private string? _searchTerm;
+
+    public string? SearchTerm 
+    { 
+        get
+        {
+            return _searchTerm;
+        } 
+        set
+        {
+           _searchTerm = value;
+
+            if (!string.IsNullOrWhiteSpace(_searchTerm)) Products = ProductService.FilterProducts(_searchTerm);
+            else Products = ProductService.GetAllProducts();
+
+            KeyPerformanceIndicators = ProductService.GetProductKeyPerformanceData();
+        }
+    }
 
     protected override void OnInitialized()
     {
