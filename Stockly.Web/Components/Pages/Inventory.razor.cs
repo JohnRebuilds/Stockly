@@ -34,7 +34,7 @@ public partial class Inventory
         if (productToUpdate is not null)
         {
             ProductService.IncreaseProductQuantity(productToUpdate);
-            LoadInventoryData();
+            KeyPerformanceIndicators = ProductService.GetProductKeyPerformanceData();
         }
     }
 
@@ -44,7 +44,7 @@ public partial class Inventory
         if (productToUpdate is not null)
         {
             ProductService.DecreaseProductQuantity(productToUpdate);
-            LoadInventoryData();
+            KeyPerformanceIndicators = ProductService.GetProductKeyPerformanceData();
         }
     }
 
