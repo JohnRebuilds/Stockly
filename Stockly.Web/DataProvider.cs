@@ -70,6 +70,7 @@ public class DataProvider
         });
     }
 
-    public IReadOnlyList<Product> GetAll() => _products;
+    public IReadOnlyList<Product> Get() => _products;
+    public IQueryable<Product> GetAsQueryable() => _products.AsQueryable();
     public Product? GetById(Guid id) => _products.FirstOrDefault(p => p.Id == id);
 }

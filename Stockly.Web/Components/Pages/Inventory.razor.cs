@@ -18,12 +18,8 @@ public partial class Inventory
         } 
         set
         {
-           _searchTerm = value;
-
-            if (!string.IsNullOrWhiteSpace(_searchTerm)) Products = ProductService.FilterProducts(_searchTerm);
-            else Products = ProductService.GetAllProducts();
-
-            KeyPerformanceIndicators = ProductService.GetProductKeyPerformanceData();
+            _searchTerm = value;
+            Products = ProductService.GetProducts(_searchTerm ?? "");
         }
     }
 

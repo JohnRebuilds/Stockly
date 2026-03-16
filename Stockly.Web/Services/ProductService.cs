@@ -11,30 +11,23 @@ public class ProductService : IProductService
 
     public IReadOnlyList<Product> GetAllProducts()
     {
-        var products = _dataProvider.GetAll();
-
+        var products = _dataProvider.Get();
         if (products is null)
         {
             return Array.Empty<Product>();
         }
-        else
-        {
-            return products;
-        }
+
+        return products;
     }
 
-    public IReadOnlyList<Product> FilterProducts(string filter)
+    public IReadOnlyList<Product> GetProducts(string filter = "")
     {
-        var products = _dataProvider.GetAll();
+        var query = _dataProvider.GetAsQueryable();
 
-        if (products is null)
+        if (!string.IsNullOrEmpty(filter))
         {
-            return Array.Empty<Product>();
+            query = query.Where(x => x.Name.Contains(filter, StringComparison.OrdinalIgnoreCase) || x.SKU.Contains(filter, StringComparison.OrdinalIgnoreCase));
         }
-
-        IQueryable<Product> query = products.AsQueryable();
-
-        query = query.Where(x => x.Name.Contains(filter) || x.SKU.Contains(filter));
 
         return query.ToList().AsReadOnly();
     }
@@ -47,7 +40,7 @@ public class ProductService : IProductService
 
     public ProductKeyPerformanceIndicators GetProductKeyPerformanceData()
     {
-        var products = GetAllProducts();
+        var products = GetProducts();
 
         int productCount = products.Count;
         decimal inventoryValue = products.Sum(x => x.Quantity * x.Price);
