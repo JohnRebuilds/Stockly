@@ -1,4 +1,4 @@
-﻿namespace Stockly.Web;
+﻿namespace Stockly.Web.Data;
 
 public class DataProvider
 {
