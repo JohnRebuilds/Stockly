@@ -5,8 +5,8 @@ public partial class Inventory
     [Inject]
     public IProductService ProductService { get; set; } = null!;
 
-    public IReadOnlyList<Product> Products { get; set; } = null!;
-    public ProductKeyPerformanceIndicators KeyPerformanceIndicators { get; set; } = null!;
+    public IReadOnlyList<Product> Products { get; set; } = new List<Product>();
+    public ProductKeyPerformanceIndicators KeyPerformanceIndicators { get; set; } = new(0, 0, 0);
 
     private string? _searchTerm;
 
@@ -19,38 +19,38 @@ public partial class Inventory
         set
         {
             _searchTerm = value;
-            Products = ProductService.GetProducts(_searchTerm ?? "");
+            //Products = ProductService.GetProducts(_searchTerm ?? "");
         }
     }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        LoadInventoryData();
+        await LoadInventoryDataAsync();
     }
 
-    private void IncreaseQuantity(Guid productId)
+    private async Task LoadInventoryDataAsync()
     {
-        Product? productToUpdate = ProductService.GetProductById(productId);
+        Products = await ProductService.GetAllProductsAsync();
+        KeyPerformanceIndicators = await ProductService.GetProductKeyPerformanceDataAsync();
+    }
+
+    private async Task IncreaseQuantity(Guid productId)
+    {
+        Product? productToUpdate = await ProductService.GetProductByIdAsync(productId);
         if (productToUpdate is not null)
         {
-            ProductService.IncreaseProductQuantity(productToUpdate);
-            KeyPerformanceIndicators = ProductService.GetProductKeyPerformanceData();
+            await ProductService.IncreaseProductQuantityAsync(productToUpdate);
+            await LoadInventoryDataAsync();
         }
     }
 
-    private void DecreaseQuantity(Guid productId)
+    private async Task DecreaseQuantity(Guid productId)
     {
-        Product? productToUpdate = ProductService.GetProductById(productId);
+        Product? productToUpdate = await ProductService.GetProductByIdAsync(productId);
         if (productToUpdate is not null)
         {
-            ProductService.DecreaseProductQuantity(productToUpdate);
-            KeyPerformanceIndicators = ProductService.GetProductKeyPerformanceData();
+            await ProductService.DecreaseProductQuantityAsync(productToUpdate);
+            await LoadInventoryDataAsync();
         }
-    }
-
-    private void LoadInventoryData()
-    {
-        Products = ProductService.GetAllProductsAsync();
-        KeyPerformanceIndicators = ProductService.GetProductKeyPerformanceData();
     }
 }
