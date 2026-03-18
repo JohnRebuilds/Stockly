@@ -2,16 +2,17 @@
 
 public class ProductService : IProductService
 {
-    private readonly DataProvider _dataProvider;
+    private readonly ApplicationDbContext _context;
 
-    public ProductService(DataProvider dataProvider)
+    public ProductService(ApplicationDbContext context)
     {
-        _dataProvider = dataProvider;
+        _context = context;
     }
 
-    public IReadOnlyList<Product> GetAllProducts()
+    public async Task<IReadOnlyList<Product>> GetAllProductsAsync()
     {
-        var products = _dataProvider.Get();
+        var products = await _context.Products.ToListAsync();
+
         if (products is null)
         {
             return Array.Empty<Product>();
@@ -20,27 +21,28 @@ public class ProductService : IProductService
         return products;
     }
 
-    public IReadOnlyList<Product> GetProducts(string filter = "")
+    public async Task<IReadOnlyList<Product>> GetProductsAsync(string filter = "")
     {
-        var query = _dataProvider.GetAsQueryable();
+        var query = _context.Products.AsQueryable();
 
         if (!string.IsNullOrEmpty(filter))
         {
             query = query.Where(x => x.Name.Contains(filter, StringComparison.OrdinalIgnoreCase) || x.SKU.Contains(filter, StringComparison.OrdinalIgnoreCase));
         }
 
-        return query.ToList().AsReadOnly();
+        var products = await query.ToListAsync();
+        return products.AsReadOnly();
     }
 
-    public Product? GetProductById(Guid id)
+    public async Task<Product?> GetProductByIdAsync(Guid id)
     {
-        var product = _dataProvider.GetById(id);
+        var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
         return product;
     }
 
-    public ProductKeyPerformanceIndicators GetProductKeyPerformanceData()
+    public async Task<ProductKeyPerformanceIndicators> GetProductKeyPerformanceDataAsync()
     {
-        var products = GetProducts();
+        var products = await GetAllProductsAsync();
 
         int productCount = products.Count;
         decimal inventoryValue = products.Sum(x => x.Quantity * x.Price);
@@ -51,16 +53,21 @@ public class ProductService : IProductService
         return new ProductKeyPerformanceIndicators(productCount, inventoryValue, lowStockProductCount);
     }
 
-    public void IncreaseProductQuantity(Product product)
+    public async Task IncreaseProductQuantityAsync(Product product)
     {
         product.Quantity++;
+
+        _context.Update(product);
+        await _context.SaveChangesAsync();
     }
 
-    public void DecreaseProductQuantity(Product product)
+    public async Task DecreaseProductQuantityAsync(Product product)
     {
         if (product.Quantity > 0)
         {
             product.Quantity--;
+            _context.Update(product);
+            await _context.SaveChangesAsync();
         }
     }
 }

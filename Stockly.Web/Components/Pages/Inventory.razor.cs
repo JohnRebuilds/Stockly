@@ -50,7 +50,7 @@ public partial class Inventory
 
     private void LoadInventoryData()
     {
-        Products = ProductService.GetAllProducts();
+        Products = ProductService.GetAllProductsAsync();
         KeyPerformanceIndicators = ProductService.GetProductKeyPerformanceData();
     }
 }
