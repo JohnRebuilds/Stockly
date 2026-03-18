@@ -18,11 +18,11 @@ Stockly är en generell lagerhanterare designad för verksamheter som hanterar s
 ### 🔢 Lagerlogik & Överblick
 - [x] **KPI-Dashboard:** Visuella kort för snabb överblick av artiklar, lagervärde och varningar.
 - [x] **Lagervärde:** Automatisk uträkning och valutaformatering av totalt ekonomiskt värde.
-- [ ] **Saldoändring:** Snabba knappar för att öka/minska antal (In- och utleverans).
-- [ ] **Nivåvarning:** Visuell indikator i tabell när `Quantity <= MinStockLevel`.
+- [x] **Saldoändring:** Snabba knappar för att öka/minska antal (In- och utleverans).
+- [x] **Nivåvarning:** Visuell indikator i tabell när `Quantity <= MinStockLevel`.
 
 ### 🔍 Sök & Navigering
-- [ ] **Smart Sök:** Filtrera listan i realtid baserat på både **Produktnamn** och **SKU (Artikelnummer)**.
+- [x] **Smart Sök:** Filtrera listan i realtid baserat på både **Produktnamn** och **SKU (Artikelnummer)**.
 - [ ] **Kategorifilter:** Visa endast specifika varugrupper (t.ex. "Handverktyg").
 
 ## 🛠 Teknisk Stack
