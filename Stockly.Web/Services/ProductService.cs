@@ -27,7 +27,8 @@ public class ProductService : IProductService
 
         if (!string.IsNullOrEmpty(filter))
         {
-            query = query.Where(x => x.Name.Contains(filter, StringComparison.OrdinalIgnoreCase) || x.SKU.Contains(filter, StringComparison.OrdinalIgnoreCase));
+            string lowercaseFilter = filter.ToLower();
+            query = query.Where(x => x.Name.ToLower().Contains(lowercaseFilter) || x.SKU.ToLower().Contains(lowercaseFilter));
         }
 
         var products = await query.ToListAsync();

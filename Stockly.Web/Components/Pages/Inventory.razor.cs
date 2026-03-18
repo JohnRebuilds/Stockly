@@ -10,27 +10,20 @@ public partial class Inventory
 
     private string? _searchTerm;
 
-    public string? SearchTerm 
-    { 
-        get
-        {
-            return _searchTerm;
-        } 
-        set
-        {
-            _searchTerm = value;
-            //Products = ProductService.GetProducts(_searchTerm ?? "");
-        }
-    }
-
     protected override async Task OnInitializedAsync()
     {
-        await LoadInventoryDataAsync();
+        await InitializeInventoryDataAsync();
     }
 
-    private async Task LoadInventoryDataAsync()
+    private async Task InitializeInventoryDataAsync()
     {
         Products = await ProductService.GetAllProductsAsync();
+        KeyPerformanceIndicators = await ProductService.GetProductKeyPerformanceDataAsync();
+    }
+
+    private async Task RefreshUIAsync()
+    {
+        Products = await ProductService.GetProductsAsync(_searchTerm ?? "");
         KeyPerformanceIndicators = await ProductService.GetProductKeyPerformanceDataAsync();
     }
 
@@ -40,7 +33,7 @@ public partial class Inventory
         if (productToUpdate is not null)
         {
             await ProductService.IncreaseProductQuantityAsync(productToUpdate);
-            await LoadInventoryDataAsync();
+            await RefreshUIAsync();
         }
     }
 
@@ -50,7 +43,13 @@ public partial class Inventory
         if (productToUpdate is not null)
         {
             await ProductService.DecreaseProductQuantityAsync(productToUpdate);
-            await LoadInventoryDataAsync();
+            await RefreshUIAsync();
         }
+    }
+
+    private async Task OnSearchInput(ChangeEventArgs e)
+    {
+        _searchTerm = e.Value?.ToString();
+        Products = await ProductService.GetProductsAsync(_searchTerm ?? "");
     }
 }
