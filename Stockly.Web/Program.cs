@@ -8,7 +8,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddScoped<DataProvider>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
