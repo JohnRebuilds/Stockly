@@ -48,7 +48,6 @@ public partial class Inventory
 
     private async Task OnSearchInput(ChangeEventArgs e)
     {
-        //Parameters.Filter = e.Value?.ToString();
         Parameters = Parameters with { Filter = e.Value?.ToString() ?? "" };
         Products = await ProductService.GetProductsAsync(Parameters);
     }
