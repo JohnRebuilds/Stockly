@@ -10,3 +10,4 @@ global using Stockly.Web.Models;
 global using Stockly.Web.Services;
 global using Stockly.Web.Components.UI.Enums;
 global using Stockly.Web.Data;
+global using Stockly.Web.Parameters;

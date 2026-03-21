@@ -12,23 +12,17 @@ public class ProductService : IProductService
     public async Task<IReadOnlyList<Product>> GetAllProductsAsync()
     {
         var products = await _context.Products.ToListAsync();
-
-        if (products is null)
-        {
-            return Array.Empty<Product>();
-        }
-
-        return products;
+        return products.AsReadOnly();
     }
 
-    public async Task<IReadOnlyList<Product>> GetProductsAsync(string filter = "")
+    public async Task<IReadOnlyList<Product>> GetProductsAsync(ProductQueryParameters parameters)
     {
         var query = _context.Products.AsQueryable();
 
-        if (!string.IsNullOrEmpty(filter))
+        if (!string.IsNullOrEmpty(parameters.Filter))
         {
-            string lowercaseFilter = filter.ToLower();
-            query = query.Where(x => x.Name.ToLower().Contains(lowercaseFilter) || x.SKU.ToLower().Contains(lowercaseFilter));
+            string filterToLower = parameters.Filter.ToLower();
+            query = query.Where(x => x.Name.ToLower().Contains(filterToLower) || (!string.IsNullOrEmpty(x.SKU) && x.SKU.ToLower().Contains(filterToLower)));
         }
 
         var products = await query.ToListAsync();

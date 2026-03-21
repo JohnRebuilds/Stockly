@@ -6,9 +6,8 @@ public partial class Inventory
     public IProductService ProductService { get; set; } = null!;
 
     public IReadOnlyList<Product> Products { get; set; } = new List<Product>();
-    public ProductKeyPerformanceIndicators KeyPerformanceIndicators { get; set; } = new(0, 0, 0);
-
-    private string? _searchTerm;
+    public ProductKeyPerformanceIndicators KeyPerformanceIndicators { get; set; } = new();
+    public ProductQueryParameters Parameters { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -23,7 +22,7 @@ public partial class Inventory
 
     private async Task RefreshUIAsync()
     {
-        Products = await ProductService.GetProductsAsync(_searchTerm ?? "");
+        Products = await ProductService.GetProductsAsync(Parameters);
         KeyPerformanceIndicators = await ProductService.GetProductKeyPerformanceDataAsync();
     }
 
@@ -49,7 +48,8 @@ public partial class Inventory
 
     private async Task OnSearchInput(ChangeEventArgs e)
     {
-        _searchTerm = e.Value?.ToString();
-        Products = await ProductService.GetProductsAsync(_searchTerm ?? "");
+        //Parameters.Filter = e.Value?.ToString();
+        Parameters = Parameters with { Filter = e.Value?.ToString() ?? "" };
+        Products = await ProductService.GetProductsAsync(Parameters);
     }
 }
