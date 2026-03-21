@@ -16,7 +16,7 @@ public partial class Inventory
 
     private async Task InitializeInventoryDataAsync()
     {
-        Products = await ProductService.GetAllProductsAsync();
+        Products = await ProductService.GetProductsAsync(Parameters);
         KeyPerformanceIndicators = await ProductService.GetProductKeyPerformanceDataAsync();
     }
 
@@ -48,7 +48,7 @@ public partial class Inventory
 
     private async Task OnSearchInput(ChangeEventArgs e)
     {
-        Parameters = Parameters with { Filter = e.Value?.ToString() ?? "" };
+        Parameters = Parameters with { SearchTerm = e.Value?.ToString() ?? "" };
         Products = await ProductService.GetProductsAsync(Parameters);
     }
 }

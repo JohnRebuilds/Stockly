@@ -19,11 +19,18 @@ public class ProductService : IProductService
     {
         var query = _context.Products.AsQueryable();
 
-        if (!string.IsNullOrEmpty(parameters.Filter))
+        if (!string.IsNullOrEmpty(parameters.SearchTerm))
         {
-            string filterToLower = parameters.Filter.ToLower();
-            query = query.Where(x => x.Name.ToLower().Contains(filterToLower) || (!string.IsNullOrEmpty(x.SKU) && x.SKU.ToLower().Contains(filterToLower)));
+            string lowercaseSearchTerm = parameters.SearchTerm.ToLower();
+
+            query = query
+                .Where(x => x.Name.ToLower().Contains(lowercaseSearchTerm) || 
+                (!string.IsNullOrEmpty(x.SKU) && x.SKU.ToLower().Contains(lowercaseSearchTerm)));
         }
+
+        query = query
+            .Skip((parameters.PageNumber - 1) * parameters.PageSize)
+            .Take(parameters.PageSize);
 
         var products = await query.ToListAsync();
         return products.AsReadOnly();

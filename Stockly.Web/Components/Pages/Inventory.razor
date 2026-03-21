@@ -32,7 +32,7 @@
         <span class="input-group-text bg-white border-end-0">
             <i class="bi bi-search text-muted"></i>
         </span>
-        <input type="text" class="form-control border-start-0" placeholder="Sök på namn eller art.nr..." value="@Parameters.Filter" @oninput="OnSearchInput"/>
+        <input type="text" class="form-control border-start-0" placeholder="Sök på namn eller art.nr..." value="@Parameters.SearchTerm" @oninput="OnSearchInput"/>
     </div>
 </div>
 @if (Products is null || Products.Count == 0)
@@ -76,4 +76,23 @@ else
             }
         </tbody>
     </table>
+    <nav>
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="/">Previous</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="/">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="/">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="/">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="/">Next</a>
+            </li>
+        </ul>
+    </nav>
 }

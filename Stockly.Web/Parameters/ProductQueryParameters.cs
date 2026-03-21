@@ -1,3 +1,3 @@
 ﻿namespace Stockly.Web.Parameters;
 
-public record ProductQueryParameters(string Filter = "", int PageNumber = 1, int PageSize = 20);
+public record ProductQueryParameters(string SearchTerm = "", int PageNumber = 1, int PageSize = 15);
